@@ -1,0 +1,28 @@
+{
+  "name": "shopify-client-store",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "react-router dev",
+    "build": "react-router build",
+    "preview": "react-router-serve ./build/server/index.js",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@shopify/hydrogen": "2026.4.1",
+    "isbot": "^4.1.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router": "^7.12.0"
+  },
+  "devDependencies": {
+    "@react-router/dev": "^7.12.0",
+    "@shopify/cli": "^3.73.3",
+    "@types/react": "^18.3.1",
+    "@types/react-dom": "^18.3.1",
+    "typescript": "^5.3.3",
+    "vite": "^5.4.0",
+    "vite-tsconfig-paths": "^5.0.0"
+  }
+}
