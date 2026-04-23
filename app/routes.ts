@@ -4,5 +4,5 @@ export default [
   index('routes/_index.tsx'),
   route('products', 'routes/products._index.tsx'),
   route('products/:handle', 'routes/products.$handle.tsx'),
-  route('about', 'routes/about.tsx'),
+  route('contact', 'routes/contact.tsx'),
 ] satisfies RouteConfig;

@@ -5,27 +5,49 @@ export interface Product {
   handle: string;
   title: string;
   price: string;
-  image?: string;
+  originalPrice?: string;
+  discount?: string;
+  category: string;
+  emoji: string;
   badge?: string;
-  emoji?: string;
+  badgeType?: 'sale' | 'new' | 'default';
+  rating: number;
+  reviews: number;
 }
 
 export function ProductCard({ product }: { product: Product }) {
+  const badgeClass =
+    product.badgeType === 'sale' ? 'product-card__badge product-card__badge--sale' :
+    product.badgeType === 'new'  ? 'product-card__badge product-card__badge--new' :
+    'product-card__badge';
+
   return (
-    <div className="product-card">
-      {product.image ? (
-        <img src={product.image} alt={product.title} className="product-card__image" />
-      ) : (
-        <div className="product-card__image-placeholder">{product.emoji ?? '📦'}</div>
-      )}
+    <article className="product-card">
+      <div className="product-card__image-wrap">
+        <span className="product-card__emoji" aria-hidden="true">{product.emoji}</span>
+        {product.badge && <span className={badgeClass}>{product.badge}</span>}
+        <button className="product-card__wishlist" aria-label={`Add ${product.title} to wishlist`}>🤍</button>
+      </div>
       <div className="product-card__body">
-        {product.badge && <span className="product-card__badge">{product.badge}</span>}
-        <div className="product-card__title">{product.title}</div>
-        <div className="product-card__price">{product.price}</div>
-        <Link to={`/products/${product.handle}`} className="btn btn-dark product-card__cta">
-          View Product
+        <div className="product-card__category">{product.category}</div>
+        <h3 className="product-card__title">{product.title}</h3>
+        <div className="product-card__rating">
+          <span className="stars">{'★'.repeat(product.rating)}{'☆'.repeat(5 - product.rating)}</span>
+          <span>({product.reviews})</span>
+        </div>
+        <div className="product-card__pricing">
+          <span className="product-card__price">{product.price}</span>
+          {product.originalPrice && (
+            <span className="product-card__original">{product.originalPrice}</span>
+          )}
+          {product.discount && (
+            <span className="product-card__discount">{product.discount}</span>
+          )}
+        </div>
+        <Link to={`/products/${product.handle}`} className="product-card__cta" aria-label={`View ${product.title}`}>
+          View Details
         </Link>
       </div>
-    </div>
+    </article>
   );
 }
